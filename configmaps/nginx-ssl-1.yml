@@ -1,0 +1,114 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-config
+data:
+  nginx.conf: |
+    worker_processes 2;
+    user nginx;
+    events {
+        worker_connections  1024;
+    }
+
+    http {
+        include       mime.types;
+        charset       utf-8;
+        client_max_body_size 8M;
+
+        server {
+          server_name _;
+          listen 80 default_server;
+          return 301 https://$host$request_uri;
+        }
+
+        server {
+          listen 443 ssl;
+          ssl_certificate /etc/nginx/ssl-certs/cert.pem;
+          ssl_certificate_key /etc/nginx/ssl-certs/key.pem;
+        }
+    }
+  
+  cert.pem: |
+    -----BEGIN CERTIFICATE-----
+    MIIFCTCCAvGgAwIBAgIUAx5M+Fu5iinTUl8KEEQwt3aMrq4wDQYJKoZIhvcNAQEL
+    BQAwFDESMBAGA1UEAwwJbG9jYWxob3N0MB4XDTIwMDYxOTIxMDcxMloXDTIxMDYx
+    OTIxMDcxMlowFDESMBAGA1UEAwwJbG9jYWxob3N0MIICIjANBgkqhkiG9w0BAQEF
+    AAOCAg8AMIICCgKCAgEA2uFllqJeQ69LZLVaBXok32/FUE1gSJ+dmGcQtC60g5GV
+    accpZ5QFajVK0fUgdlYYd8WUaVvNP34sdPqF4wf+xFt32oWdtuEb4tpqsM7545Cv
+    rp+NvVU9NziA5G2ErF3TbukU0V0EtbElGb8KnXjZeCeMjRTkF32iYE683dcbqoiq
+    GELq4XEcGPqMvRwhhAdIuyU7X3Ql1XPrFxu/pz42T9l+gNu+BXy9N9v3kcpOPqLy
+    t5GD4AxkuRfEwz/9oS8KEV8F6HZQOhjju988PHV9cQTnL7hq3BREBgLzS80xetDj
+    7D+7u/B2WWuSNiulu0FurCkRxgnh6omWP+BMLRDH6BiN5ltWgZ0unaxSjU1gehEp
+    oilC5BymkcE/HhAiJ+Fuo+l1+jiUIdriHLjfci6Mh2oikv9J6mnproTT/97MjBNn
+    lriY1ON6YPfcd2tXnVnOtBjUtLZYYqWciIlLIAIR6ncACsohiCSUx7qgY8a8OGni
+    7tMDGBF/yHSFdsecw1wuGngEcUFuYv8T5juvePAysQYe0hsOngaS9Z60WY+wrsnc
+    5Oh3nUHnahMHmhprPtHmyO7Ze/KxVHyJ8h47rDUOUNFKpiLJTOMdmeQZSZX01/qq
+    T9UTzmKx/LPXV/SQOq1DCfryP740gvgCeHNt6/uo5E6TiZzJULDGelhgcXUxbJMC
+    AwEAAaNTMFEwHQYDVR0OBBYEFNnPLpYBmuNvqDVhLKZU/P+szJQvMB8GA1UdIwQY
+    MBaAFNnPLpYBmuNvqDVhLKZU/P+szJQvMA8GA1UdEwEB/wQFMAMBAf8wDQYJKoZI
+    hvcNAQELBQADggIBADEcAWR+YCn9C/+mwrs5pzubPxim+dJMdtwonokMqatGi2Js
+    5Ew7nON5gjzxbDZOLLCmORHElvHohIXCHcDU7YU3rmTWn28KAsrJRLuoxtXutdXa
+    SiHVEeMzvMLrvX9MPewcKTI4Y/iZWwob33P5oSF1WECyCECe4NBuM9BsV44AACSm
+    Hj38b2py1nZh4RIBIy5tjP+ihyYJ/RtPC9T5ptUMb2HgxPDFWaH7HIrS+mdx9nHf
+    6w34GmxVlWz5rHqtBmn/nqjNqR7S7zXa4N4PmHH0VtyZC6i4RqNjLif84XGgFPm7
+    LciMzMLKH7oQp/IZ7S2XefJauPv2jckNorhGe+nNBYCaWzKcqbJ1tgg+v9IcOPnj
+    4W6lCnyA+U3bx7+5lhEFw9saRGQyAvau0WG4ld+J1Kz3JB/aN3jHBs9G/M+ZNZT1
+    fuHWPW3CDoct0fqp8KcAwViL9H/1nU0ieKmgYUiyt/5R4QooYUmXFGWDJlgQNDq4
+    QuTg4dtUOE5gUefeo00d5vzjFjp8wfRxkBjhNQI0sV03qjVr0B46J+DKJao+hkTI
+    s2wf3JWxsD8LLYZHwoz6F6aVgG2c83zgimGYGljq4quI7U7avcJS3RaqpW8x9k68
+    qMe3l/vZyIanfYQkgv7X7ocxjbaoc43b0qeTHdI1KX8DVRs4Q9NADEqNfv3w
+    -----END CERTIFICATE-----
+
+  key.pem: |
+    -----BEGIN PRIVATE KEY-----
+    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
+    oG5YPZwbNr65UyzRAHkyvzfPuwei/6kV
+    -----END PRIVATE KEY-----
