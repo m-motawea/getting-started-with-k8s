@@ -21,6 +21,7 @@ $ kubectl apply -f services/nginx-service-1.yml
 
 
 2- First Deployment:
+
 create a deployment of nginx with 3 rplicas
 
 ```bash
@@ -29,6 +30,7 @@ $ kubectl apply -f deployments/nginx-deployment-1.yml
 
 
 3- Create a Config Map:
+
 this config map will contain nginx config, ssl cert and key to be used to deploy nginx
 
 ```bash
@@ -37,6 +39,7 @@ $ kubectl apply -f configmaps/nginx-ssl-1.yml
 
 
 4- Nginx SSL Deployment:
+
 will use the created config map to create a volume and mount it in nginx containers
 
 ```bash
@@ -45,12 +48,14 @@ $ kubectl apply -f deployments/nginx-ssl-deployment-1.yml
 
 
 5- Check your Deployment History
+
 ```bash
 $ kubectl rollout history deploy nginx-deployment
 ```
 
 
 6- Rollback to Previous Deployment
+
 ```bash
 $ kubectl rollout undo deploy nginx-deployment
 ```
