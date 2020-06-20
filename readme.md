@@ -4,6 +4,9 @@ this repo includes some stuff used when trying k8s for the first time
 ##### Installation:
 https://vitux.com/install-and-deploy-kubernetes-on-ubuntu/
 
+##### Nginx Ingress Controller:
+https://docs.nginx.com/nginx-ingress-controller/installation/installation-with-manifests/
+
 
 ##### Usage:
 1- First Pod:
@@ -61,3 +64,4 @@ $ kubectl rollout undo deploy nginx-deployment
 ```
 
 
+7- 
