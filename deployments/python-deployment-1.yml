@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: python-web-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: python-web
+  template:
+    metadata:
+      labels:
+        app: python-web
+    spec:
+      containers:
+      - name: python
+        image: python:3.8
+        command: ["python3"]
+        args: ["-m", "http.server"]
+        ports:
+          - name: http
+            containerPort: 8000
