@@ -64,4 +64,3 @@ $ kubectl rollout undo deploy nginx-deployment
 ```
 
 
-7- Ingress
